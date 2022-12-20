@@ -3,10 +3,27 @@ data:
   http.conf: |
     server {
             listen 80;
-            server_name test.sharqa.com;
-            root /www/;
-            index index.html;
+            server_name test.webapp.com;
+            location / {
+                   root /www/html;
+            }
+            error_page 404 /custom_404.html;
+            location /custom_404.html {
+                    root /www/html;
+                    internal;
+            }
+            error_page 500 502 503 504 /custom_50x.html;
+            location /custom_50x.html {
+                    root /www/html;
+                    internal;
+            }
+            location = /testing {
+                    fastcgi_pass unix:/does/not/exist;
+            }
     }
+
+    # It tells the client to cache below resources
+    # index index.html;
 kind: ConfigMap
 metadata:
   creationTimestamp: null

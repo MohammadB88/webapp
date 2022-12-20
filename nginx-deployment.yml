@@ -26,7 +26,7 @@ spec:
         - name: config
           mountPath: /etc/nginx/conf.d/
         - name: content
-          mountPath: /www/
+          mountPath: /www/html/
       volumes:
       - name: config
         configMap:
