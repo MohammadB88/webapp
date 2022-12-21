@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: shop
+  name: shop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shop
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: shop
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        ports:
+        - name: http
+          containerPort: 80
+        volumeMounts:
+        - name: config
+          mountPath: /etc/nginx/conf.d/
+        - name: content
+          mountPath: /www/html/
+        - name: webapp-template
+          mountPath: /www/html/webapp/shop
+      volumes:
+      - name: config
+        configMap:
+          name: shop-conf
+      - name: content
+        configMap:
+          name: http-content
+      - name: webapp-template
+        persistentVolumeClaim:
+          claimName: shop-pvc
+
