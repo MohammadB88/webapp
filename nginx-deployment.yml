@@ -21,7 +21,8 @@ spec:
       - image: nginx
         name: nginx
         ports:
-        - containerPort: 80
+        - name: http
+          containerPort: 80
         volumeMounts:
         - name: config
           mountPath: /etc/nginx/conf.d/
@@ -34,4 +35,3 @@ spec:
       - name: content
         configMap:
           name: http-content
-
