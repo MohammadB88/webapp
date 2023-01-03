@@ -13,3 +13,10 @@ spec:
               name: frontend-svc
               port: 
                 number: 3000
+        - path: /
+          pathType: Exact
+          backend:
+            service:
+              name: static-svc
+              port: 
+                number: 80 

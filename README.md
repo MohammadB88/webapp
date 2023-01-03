@@ -11,4 +11,19 @@ In this project, I will deploy different webapp applications on a local kubernet
 
 ## Application with Ingress and Secret
 
-- This application is based on GO and will save the username and its message in a database and desplay it on the browser. More information can be found on [Deploying An Application On Kubernetes From A to Z](https://www.weave.works/blog/deploying-an-application-on-kubernetes-from-a-to-z)
+- This application is based on GO and will save the username and its message in a database and desplay it on the browser. More information can be found on [Deploying An Application On Kubernetes From A to Z](https://www.weave.works/blog/deploying-an-application-on-kubernetes-from-a-to-z).
+
+Since I am running the application on a local server without load-balancing function, it is possible to reach the application using 
+
+```
+kubectl port-forward TYPE/NAME LOCAL_PORT:REMOTE_PORT
+kubectl port-forward --namespace=ingress-nginx service/ingress-nginx-controller 8080:80
+
+```
+
+which forwards the traffic to one or more local ports to a deployment port more precisely pod port.
+
+This application is running without problem on the kubernetes cluster, but its content can not be found. Hence, I will come back to it later.
+
+
+
