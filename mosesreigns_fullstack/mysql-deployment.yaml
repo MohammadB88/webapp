@@ -38,7 +38,7 @@ spec:
               add:
                 - SYS_NICE
           volumeMounts:
-            - mountPath: /docker-entrypoint-initdb.d/setup.sql
+            - mountPath: /docker-entrypoint-initdb.d
               name: mysql-db-claim
       restartPolicy: Always
       volumes:

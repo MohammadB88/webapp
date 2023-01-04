@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    name: mysql-db
-  name: mysql-db
+    name: mysql-db-svc
+  name: mysql-db-svc
 spec:
   ports:
     - name: "9906"
