@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: api
+  name: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: api
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: api
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_DATABASE
+              value: books
+            - name: MYSQL_HOST_IP
+              value: mysql_db
+            - name: MYSQL_PASSWORD
+              value: MYSQL_PASSWORD
+            - name: MYSQL_USER
+              value: MYSQL_USER
+          image: mohammad67/mosesreigns_apiserver:v1.0
+          name: api
+          ports:
+          - containerPort: 3001
