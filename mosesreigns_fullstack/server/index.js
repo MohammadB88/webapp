@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 
 // get all of the books in the database
 app.get('/get', (req, res) => {
-  const SelectQuery = " SELECT * FROM  books_reviews";
+  const SelectQuery = "SELECT * FROM  books_reviews";
   db.query(SelectQuery, (err, result) => {
     res.send(result)
   })

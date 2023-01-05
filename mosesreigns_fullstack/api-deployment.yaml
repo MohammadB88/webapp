@@ -2,19 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    name: api
+    app: api-backend
   name: api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: api
+      app: api-backend
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        name: api
+        app: api-backend
     spec:
       containers:
         - env:
@@ -26,7 +26,8 @@ spec:
               value: MYSQL_PASSWORD
             - name: MYSQL_USER
               value: MYSQL_USER
-          image: mohammad67/mosesreigns_apiserver:v1.0
+          image: mohammad67/mosesreigns_apiserver:v1.1
           name: api
+          imagePullPolicy: Always
           ports:
           - containerPort: 3001

@@ -2,12 +2,10 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    name: mysql-db-svc
+    app: database
   name: mysql-db-svc
 spec:
   ports:
-    - name: "9906"
-      port: 9906
-      targetPort: 3306
+    - port: 3306
   selector:
     name: mysql-db

@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    name: api-svc
+    app: api-backend
   name: api-svc
 spec:
   ports:
@@ -10,6 +10,6 @@ spec:
     protocol: TCP
     targetPort: 3001
   selector:
-    name: api
+    app: api-backend
 status:
   loadBalancer: {}

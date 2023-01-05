@@ -2,19 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    name: mysql-db
+    app: database
   name: mysql-db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: mysql-db
+      app: database
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        name: mysql-db
+        app: database
     spec:
       containers:
         - env:
@@ -22,16 +22,16 @@ spec:
               value: books
             - name: MYSQL_HOST
               value: localhost
+            - name: MYSQL_USER
+              value: MYSQL_USER
             - name: MYSQL_PASSWORD
               value: MYSQL_PASSWORD
             - name: MYSQL_ROOT_PASSWORD
               value: MYSQL_ROOT_PASSWORD
-            - name: MYSQL_USER
-              value: MYSQL_USER
           image: mysql
           name: mysql-db
           ports:
-            - containerPort: 3306
+          - containerPort: 3306
           resources: {}
           securityContext:
             capabilities:
@@ -39,10 +39,8 @@ spec:
                 - SYS_NICE
           volumeMounts:
             - mountPath: /docker-entrypoint-initdb.d
-              name: mysql-db-claim
-      restartPolicy: Always
+              name: mysql-script
       volumes:
-        - name: mysql-db-claim
-          persistentVolumeClaim:
-            claimName: mysql-db-pvc
-status: {}
+        - name: mysql-script
+          configMap:
+            name: database-init-script
