@@ -27,7 +27,13 @@ app.get('/', (req, res) => {
 app.get('/get', (req, res) => {
   const SelectQuery = "SELECT * FROM  books_reviews";
   db.query(SelectQuery, (err, result) => {
-    res.send(result)
+     if(err)
+  {
+     console.log(err)
+  }else{
+     console.log('GOT')
+  }
+     res.send(result)
   })
 })
 
@@ -37,7 +43,13 @@ app.post("/insert", (req, res) => {
   const bookReview = req.body.setReview;
   const InsertQuery = "INSERT INTO books_reviews (book_name, book_review) VALUES (?, ?)";
   db.query(InsertQuery, [bookName, bookReview], (err, result) => {
-    console.log(result)
+     if(err)
+  {
+     console.log(err)
+  }else{
+     console.log('INSERTED')
+  }
+	// console.log(result)
   })
 })
 
@@ -46,7 +58,12 @@ app.delete("/delete/:bookId", (req, res) => {
   const bookId = req.params.bookId;
   const DeleteQuery = "DELETE FROM books_reviews WHERE id = ?";
   db.query(DeleteQuery, bookId, (err, result) => {
-    if (err) console.log(err);
+     if(err)
+  {
+     console.log(err)
+  }else{
+     console.log('DELETED')
+  }
   })
 })
 
@@ -56,8 +73,20 @@ app.put("/update/:bookId", (req, res) => {
   const bookId = req.params.bookId;
   const UpdateQuery = "UPDATE books_reviews SET book_review = ? WHERE id = ?";
   db.query(UpdateQuery, [bookReview, bookId], (err, result) => {
-    if (err) console.log(err)
+     if(err)
+  {
+     console.log(err)
+  }else{
+     console.log('UPDATED')
+  }
   })
 })
 
-app.listen('3001', () => { })
+app.listen('3001', (err) => { 
+     if(err)
+  {
+     console.log(err)
+  }else{
+     console.log('ON PORT 3001')
+  }
+})
