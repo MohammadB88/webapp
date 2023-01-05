@@ -5,8 +5,10 @@ metadata:
     app: reverse-proxy
   name: nginx-svc
 spec:
+  type: NodePort
   ports:
     - port: 3050
       targetPort: 80
+      nodePort: 30050
   selector:
     app: reverse-proxy

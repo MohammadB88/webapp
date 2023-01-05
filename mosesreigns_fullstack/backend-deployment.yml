@@ -26,7 +26,7 @@ spec:
               value: MYSQL_PASSWORD
             - name: MYSQL_USER
               value: MYSQL_USER
-          image: mohammad67/mosesreigns_apiserver:v1.1
+          image: mohammad67/mosesreigns_apiserver:v1.0
           name: backend
           imagePullPolicy: Always
           ports:

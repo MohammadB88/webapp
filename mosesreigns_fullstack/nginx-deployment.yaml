@@ -17,5 +17,6 @@ spec:
       containers:
         - image: mohammad67/mosesreigns_nginx:v1.0
           name: nginx
+          imagePullPolicy: Always
           ports:
           - containerPort: 80
