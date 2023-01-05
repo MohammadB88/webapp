@@ -2,19 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    name: client
+    app: frontend
   name: client
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: client
-  strategy:
-    type: Recreate
+      app: frontend
   template:
     metadata:
       labels:
-        name: client
+        app: frontend
     spec:
       containers:
         - image: mohammad67/mosesreigns_client:v1.0
@@ -22,11 +20,3 @@ spec:
           imagePullPolicy: Always
           ports:
           - containerPort: 3000
-          #      volumeMounts:
-          #  - mountPath: /app
-          #    name: client-claim
-          #restartPolicy: Always
-          #volumes:
-          # - name: client-claim
-          #persistentVolumeClaim:
-          #claimName: client-pvc

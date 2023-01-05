@@ -2,14 +2,11 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    name: adminer-svc
+    app: adminer
   name: adminer-svc
 spec:
   ports:
-    - name: "8000"
-      port: 8000
+    - port: 8000
       targetPort: 8080
   selector:
-    name: adminer
-status:
-  loadBalancer: {}
+    app: adminer

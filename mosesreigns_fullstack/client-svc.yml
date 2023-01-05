@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    name: client-svc
+    app: frontend
   name: client-svc
 spec:
   ports:
@@ -10,4 +10,4 @@ spec:
     protocol: TCP
     targetPort: 3000
   selector:
-    name: client
+    app: frontend
