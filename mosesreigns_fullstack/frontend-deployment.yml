@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: frontend
-  name: client
+  name: frontend
 spec:
   replicas: 1
   selector:
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - image: mohammad67/mosesreigns_client:v1.0
-          name: client
+          name: frontend
           imagePullPolicy: Always
           ports:
           - containerPort: 3000

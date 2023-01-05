@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     app: backend
-  name: api-svc
+  name: backend-svc
 spec:
   ports:
   - port: 3001

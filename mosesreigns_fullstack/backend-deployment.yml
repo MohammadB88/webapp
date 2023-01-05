@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: backend
-  name: api
+  name: backend
 spec:
   replicas: 1
   selector:
@@ -27,7 +27,7 @@ spec:
             - name: MYSQL_USER
               value: MYSQL_USER
           image: mohammad67/mosesreigns_apiserver:v1.1
-          name: api
+          name: backend
           imagePullPolicy: Always
           ports:
           - containerPort: 3001
