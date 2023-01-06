@@ -36,3 +36,5 @@ I have looked into and used the example from [Build and Dockerize a Fullstack Re
 - More Configmaps
 - PersistentVolumes for database
 - A nicer User Interface.
+
+
