@@ -22,11 +22,17 @@ spec:
               value: books
             - name: MYSQL_HOST_IP
               value: mysql-db-svc
-            - name: MYSQL_PASSWORD
-              value: MYSQL_PASSWORD
             - name: MYSQL_USER
-              value: MYSQL_USER
-          image: mohammad67/mosesreigns_apiserver:v1.1
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: user
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: password
+          image: mohammad67/mosesreigns_apiserver:v1.2
           name: backend
           imagePullPolicy: Always
           ports:

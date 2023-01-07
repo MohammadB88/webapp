@@ -5,10 +5,10 @@ const app = express();
 
 // Add mysql database connection
 const db = mysql.createPool({
-  host: 'mysql-db-svc', // the host name MYSQL_DATABASE: node_mysql
-  user: 'MYSQL_USER', // database user MYSQL_USER: MYSQL_USER
-  password: 'MYSQL_PASSWORD', // database user password MYSQL_PASSWORD: MYSQL_PASSWORD
-  database: 'books' // database name MYSQL_HOST_IP: mysql_db
+  host: process.env.MYSQL_HOST_IP, //'mysql-db-svc', // the host name MYSQL_DATABASE: node_mysql
+  user: process.env.MYSQL_USER, //'MYSQL_USER', // database user MYSQL_USER: MYSQL_USER
+  password: process.env.MYSQL_PASSWORD, //'MYSQL_PASSWORD', // database user password MYSQL_PASSWORD: MYSQL_PASSWORD
+  database: process.env.MYSQL_DATABASE //'books' // database name MYSQL_HOST_IP: mysql_db
 })
 
 // Enable cors security headers
