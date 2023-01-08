@@ -3,7 +3,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-import { Button, Container, Card, Row } from 'react-bootstrap'
+import { Button, Container, Card, Row } from 'react-bootstrap';
+
+// Import the background image
+//import background from './background.png';
 
 class App extends Component {
   constructor(props) {
@@ -57,6 +60,7 @@ class App extends Component {
     axios.put(`/api/update/${id}`, this.state)
     document.location.reload();
   }
+
   render() {
 
     let card = this.state.fetchData.map((val, key) => {
@@ -78,7 +82,8 @@ class App extends Component {
     })
 
     return (
-      <div className='App'>
+     // <div className='App' style={{backgroundImage: `url(${background})`}}>
+      <div className='body'>
         <h1>Dockerized Fullstack React Application</h1>
         <div className='form'>
           <input name='setBookName' placeholder='Enter Book Name' onChange={this.handleChange} />
@@ -94,6 +99,6 @@ class App extends Component {
         </Container>
       </div>
     );
-  }
+  } 
 }
 export default App;
