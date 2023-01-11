@@ -1,5 +1,9 @@
 node {
     def app
+    stage('Initialize'){
+        def dockerHome = tool 'mydocker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"
+    }
     stage('Clone repository') {
         checkout([$class: 'GitSCM', 
         branches: [[name: '*/main']],
@@ -11,7 +15,7 @@ node {
         sh "ls -ltr"
     }
     stage('build image') {
-        app = docker.build("mohammad67/test")
+        app = mydocker.build("mohammad67/test")
     }
     stage('test') {
         steps {
@@ -19,7 +23,7 @@ node {
         }
     }
     stage('push image') {
-        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+        mydocker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
             app.push("${env.BUILD_NUMBER}") 
         }
     }
