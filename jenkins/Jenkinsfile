@@ -1,4 +1,7 @@
 node {
+    tools{
+      docker "mydocker"
+    }
     stage('Clone repository') {
         checkout([$class: 'GitSCM', 
         branches: [[name: '*/main']],
