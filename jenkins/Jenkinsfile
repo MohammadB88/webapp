@@ -15,7 +15,7 @@ node {
         sh "ls -ltr"
     }
     stage('build image') {
-        app = mydocker.build("mohammad67/test")
+        app = docker.build("mohammad67/test")
     }
     stage('test') {
         steps {
@@ -23,7 +23,7 @@ node {
         }
     }
     stage('push image') {
-        mydocker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
             app.push("${env.BUILD_NUMBER}") 
         }
     }
