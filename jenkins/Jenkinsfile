@@ -1,8 +1,4 @@
 node {
-    stage('Initialize'){
-        def dockerHome = tool 'mydocker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
-    }
     stage('Clone repository') {
         checkout([$class: 'GitSCM', 
         branches: [[name: '*/main']],
