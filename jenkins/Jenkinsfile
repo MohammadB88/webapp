@@ -15,7 +15,7 @@ node {
         sh "ls -ltr"
     }
     stage('build image') {
-        app = docker.build("mohammad67/test")
+        app = docker.build("mohammad67/test", "./fullstack/nginx")
     }
     stage('test') {
         steps {
