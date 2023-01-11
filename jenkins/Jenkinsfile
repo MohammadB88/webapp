@@ -15,7 +15,7 @@ node {
         sh "ls -ltr"
     }
     stage('build image') {
-        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+        dockerHome.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
             app = docker.build("mohammad67/test:${env.BUILD_NUMBER}", "./fullstack/nginx")
             app.push() 
         }
