@@ -16,6 +16,7 @@ node {
     }
     stage('build image') {
         app = docker.build("mohammad67/test:${env.BUILD_NUMBER}", "./fullstack/nginx")
+        app.push()
     }
     stage('test') {
             sh 'echo Hello from Test Section'
