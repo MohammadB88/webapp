@@ -17,7 +17,7 @@ pipeline {
         stage('build image') {
       	  steps {
 	          script {
-	             sh "${docker_loc}/mydocker build -t mohammad67/test:${BUILD_NUMBER} -f ./fullstack/nginx .")
+	             sh "${docker_loc}/mydocker build -t mohammad67/test:${BUILD_NUMBER} -f ./fullstack/nginx ."
 	          }
 	        }
         }
