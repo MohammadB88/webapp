@@ -22,6 +22,8 @@ node {
     }
     stage('push image') {
         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+            def dockerHome = tool 'mydocker'
+            env.PATH = "${dockerHome}/bin:${env.PATH}"
             app.push("mohammad67/test:${env.BUILD_NUMBER}") 
         }
     }
