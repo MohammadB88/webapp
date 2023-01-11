@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    def docker_loc = tool 'mydocker'
     stages {
         stage('Checkout') {
             steps {
@@ -16,7 +17,7 @@ pipeline {
         stage('build image') {
       	  steps {
 	          script {
-	             docker_image = docker.build("mohammad67/test:${BUILD_NUMBER}", "./fullstack/nginx")
+	             sh "${docker_loc}/mydocker build -t mohammad67/test:${BUILD_NUMBER} -f ./fullstack/nginx .")
 	          }
 	        }
         }
