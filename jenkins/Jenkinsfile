@@ -1,5 +1,4 @@
 node {
-    def app
     stage('Initialize'){
         def dockerHome = tool 'mydocker'
         env.PATH = "${dockerHome}/bin:${env.PATH}"
@@ -15,8 +14,8 @@ node {
         sh "ls -ltr"
     }
     stage('build image') {
-        dockerHome.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-            app = docker.build("mohammad67/test:${env.BUILD_NUMBER}", "./fullstack/nginx")
+        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+            def app = docker.build("mohammad67/test:${env.BUILD_NUMBER}", "./fullstack/nginx")
             app.push() 
         }
     }
