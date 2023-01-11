@@ -13,29 +13,29 @@ pipeline {
               sh "ls -ltr"
           }
         }
-    }
-    stage('build image') {
-      	steps {
-	        script {
-	           docker_image = docker.build("mohammad67/test:${BUILD_NUMBER}", "./fullstack/nginx")
+        stage('build image') {
+      	  steps {
+	          script {
+	             docker_image = docker.build("mohammad67/test:${BUILD_NUMBER}", "./fullstack/nginx")
+	          }
 	        }
-	      }
-    }
-    stage('test') {
-	      steps {
-          sh 'echo Hello from Test Section'
-	      }
-    }
-    stage('push image') {
-	      steps {
-          script {
-	   	       docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-	        	   docker_image.push("mohammad67/test:${BUILD_NUMBER}") 
-        	   }
+        }
+        stage('test') {
+	        steps {
+           sh 'echo Hello from Test Section'
 	        }
-	      }
-    }
-    stage('deploy') {
+        }
+        stage('push image') {
+	        steps {
+            script {
+	   	        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+	        	    docker_image.push("mohammad67/test:${BUILD_NUMBER}") 
+        	    }
+	          }
+	        }
+        }
+        stage('deploy') {
             sh 'echo Hello from Deploy Section'
+        }
     }
 }
