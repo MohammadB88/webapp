@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+              checkout([$class: 'GitSCM', 
+                branches: [[name: '*/main']],
+                extensions: [
+                    [$class: 'SparseCheckoutPaths', 
+                    sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'/fullstack/nginx']]]
+                    ],
+                userRemoteConfigs: [[url: 'https://github.com/MohammadB88/webapp.git']]])
+              sh "ls -ltr"
+          }
+        }
+
+        stage('build image') {
+      	  steps {
+	          script {
+              sh "pwd"
+              dir('fullstack/nginx') {
+                  sh "pwd"
+                  sh 'ls -la'
+                  sh 'docker build -t "mohammad67/test:${BUILD_NUMBER}" . '
+              }
+              sh "pwd"
+	          }
+	        }
+        }
+
+        stage('test') {
+	        steps {
+           sh 'echo Hello from Test Section'
+	        }
+        }
+
+        stage('push image') {
+	        steps {
+            script {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]){
+                    sh 'docker login -u$user -p$pass'
+                    sh 'docker push mohammad67/test:${BUILD_NUMBER}'
+                }
+        	    }
+	          }
+	      }
+        
+        stage('deploy') {
+          steps {
+            sh 'echo Hello from Deploy Section'
+          }
+        }
+    }
+}
