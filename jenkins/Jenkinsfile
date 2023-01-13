@@ -37,9 +37,8 @@ pipeline {
                 }
         	    }
 	          }
-	        }
-        }
-
+	      }
+        
         stage('deploy') {
           steps {
             sh 'echo Hello from Deploy Section'
