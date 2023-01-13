@@ -13,28 +13,33 @@ pipeline {
               sh "ls -ltr"
           }
         }
+
         stage('build image') {
       	  steps {
 	          script {
-              def docker_loc = tool 'mydocker'
-	            sh "${docker_loc} build -t mohammad67/test:${BUILD_NUMBER} -f ./fullstack/nginx ."
+	            sh "docker build -t mohammad67/test:${BUILD_NUMBER} -f ./fullstack/nginx ."
 	          }
 	        }
         }
+
         stage('test') {
 	        steps {
            sh 'echo Hello from Test Section'
 	        }
         }
+
         stage('push image') {
 	        steps {
             script {
-	   	        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-	        	    docker_image.push("mohammad67/test:${BUILD_NUMBER}") 
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]){
+                    sh 'docker login -u$user -p$pass'
+                    sh 'docker push mohammad67/test:${BUILD_NUMBER}'
+                }
         	    }
 	          }
 	        }
         }
+
         stage('deploy') {
           steps {
             sh 'echo Hello from Deploy Section'
