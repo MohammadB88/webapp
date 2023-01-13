@@ -22,6 +22,7 @@ pipeline {
                   sh "pwd"
                   sh 'ls -la'
                   sh 'docker build -t "mohammad67/bookreview_nginx:${BUILD_NUMBER}" . '
+                  sh 'docker build -t "mohammad67/bookreview_nginx:latest" . '
               }
               sh "pwd"
 	          }
@@ -40,6 +41,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]){
                     sh 'docker login -u$user -p$pass'
                     sh 'docker push mohammad67/bookreview_nginx:${BUILD_NUMBER}'
+                    sh 'docker push mohammad67/bookreview_nginx:latest'
                 }
         	    }
 	          }
