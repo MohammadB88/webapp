@@ -7,9 +7,9 @@ pipeline {
                 branches: [[name: '*/main']],
                 extensions: [
                     [$class: 'SparseCheckoutPaths', 
-                    sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'/jenkins/script']]]
+                    sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'/fullstack/nginx']]]
                     ],
-                userRemoteConfigs: [[url: 'https://github.com/naiveskill/devops.git']]])
+                userRemoteConfigs: [[url: 'https://github.com/MohammadB88/webapp.git']]])
               sh "ls -ltr"
           }
         }
