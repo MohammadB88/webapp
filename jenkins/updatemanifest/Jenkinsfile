@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+ 
+    environment {
+        DOCKERTAG = 'latest'
+        COMPONENT = 'NODEFAULT'
+    }
+       
+    stages {
+        stage('Checkout') {
+            steps {
+              checkout([$class: 'GitSCM',
+                branches: [[name: '*/main']],
+                extensions: [
+                    [$class: 'SparseCheckoutPaths',
+                    sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'/fullstack']]]                    ],
+                userRemoteConfigs: [[url: 'https://github.com/MohammadB88/webapp.git']]])
+              sh "ls -ltr"
+          }
+        }
+
+        stage('Update GIT') {
+            steps {
+                script {
+                    sh "pwd"
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                            //def encodedPassword = URLEncoder.encode("$GIT_PASSWORD",'UTF-8')
+                            sh "git config user.email bahmani.m.n@gmail.com"
+                            sh "git config user.name MohammadB88"
+                            //sh "git switch master"
+                            sh "cat fullstack/${COMPONENT}-deployment.yaml"
+                            sh "sed -i 's+mohammad67/bookreview_${COMPONENT}.*+mohammad67/bookreview_${COMPONENT}:${DOCKERTAG}+g' fullstack/${COMPONENT}-deployment.yaml"
+                            sh "cat fullstack/nginx-deployment.yaml"
+                            sh "git add fullstack/${COMPONENT}-deployment.yaml"
+                            sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER} for component ${COMPONENT}'"
+                            sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/webapp.git HEAD:main"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
