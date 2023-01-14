@@ -1,11 +1,6 @@
 pipeline {
     agent any
  
-    //environment {
-    //    DOCKERTAG = 'latest'
-    //    COMPONENT = 'NODEFAULT'
-    //}
-       
     parameters {
          string(name: 'DOCKERTAG', defaultValue: 'latest')
          string(name: 'COMPONENT', defaultValue: 'NODEFAULT')
@@ -23,6 +18,14 @@ pipeline {
               sh "ls -ltr"
           }
         }
+
+        stage('print the parameters') {
+          steps {
+            sh 'echo DOCKERTAG is ${DOCKERTAG}'
+            sh 'echo COMPONENT is ${COMPONENT}'
+          }
+        }
+        
 
         stage('Update GIT') {
             steps {
