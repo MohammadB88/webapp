@@ -40,9 +40,11 @@ I have looked into and used the example from [Build and Dockerize a Fullstack Re
 ### Use the whole DevOps package for FullStack Application
 - Use Jenkins to build the image and push it to the dockerhub
 - Use ArgoCD to deploy the new application
-- Use ELK to monitor and analyze the cluster behaviour
+- Use ELK to monitor and analyze the cluster behaviour (not implemented)
 
-Here, I use the appoach explained in [Saha Rajdeep Repo](https://github.com/saha-rajdeep/kubernetescode), where he uses two jenkins' pipeline for Continuous Integration/Deployment (CI) and Continuous Delivery (CD). In the first pipeline, the images will be build and pushed to the dockerhub, and then the next pipeline will be triggered. The second pipeline will make the necessary modifications to the kubernetes resources and then push them to the corresponding repository.
+Here, I use the appoach explained in [Saha Rajdeep Repo](https://github.com/saha-rajdeep/kubernetescode), where he uses two jenkins pipelines, one for Continuous Integration/Deployment (CI) and another one for Continuous Delivery (CD). 
 
-ArgoCD will monitor the repository for any changes and trigger an update of the deployment.
+In the first pipeline, the images will be build and pushed to the dockerhub, and then the next pipeline will be triggered. The second pipeline will make the necessary modifications to the kubernetes resources and then push them to the corresponding repository.
+
+ArgoCD will regularly (every 30s) monitor the repository for any changes and trigger an update of the deployment. I have implemented the whole lifecycle for nginx part.
 
