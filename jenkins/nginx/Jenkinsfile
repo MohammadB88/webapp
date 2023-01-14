@@ -24,7 +24,7 @@ pipeline {
       	  steps {
 	          script {
               sh "pwd"
-              dir('fullstack/${COMPONENT}') {
+              dir('fullstack/env.COMPONENT') {
                   sh "pwd"
                   sh 'ls -la'
                   sh 'docker build -t "mohammad67/bookreview_${COMPONENT}:${BUILD_NUMBER}" . '
