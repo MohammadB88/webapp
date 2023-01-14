@@ -15,7 +15,7 @@ spec:
         app: reverse-proxy
     spec:
       containers:
-        - image: mohammad67/bookreview_nginx:latest
+        - image: mohammad67/bookreview_nginx:3
           name: nginx
           imagePullPolicy: Always
           ports:
