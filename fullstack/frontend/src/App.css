@@ -13,7 +13,7 @@
 }
 
 .body {
-  #background-image: url(./img/background.png);
+  /* background-image: url(./img/background.png);*/
   background-size: 'cover';
   background-color: blue;
   color: black;
