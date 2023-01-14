@@ -7,7 +7,7 @@ pipeline {
                 branches: [[name: '*/main']],
                 extensions: [
                     [$class: 'SparseCheckoutPaths', 
-                    sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'/fullstack/nginx']]]
+                    sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'/fullstack/frontend']]]
                     ],
                 userRemoteConfigs: [[url: 'https://github.com/MohammadB88/webapp.git']]])
               sh "ls -ltr"
@@ -18,10 +18,11 @@ pipeline {
       	  steps {
 	          script {
               sh "pwd"
-              dir('fullstack/nginx') {
+              dir('fullstack/frontend') {
                   sh "pwd"
                   sh 'ls -la'
-                  sh 'docker build -t "mohammad67/test:${BUILD_NUMBER}" . '
+                  sh 'docker build -t "mohammad67/bookreview_frontend:${BUILD_NUMBER}" . '
+                  sh 'docker build -t "mohammad67/bookreview_frontend:latest" . '
               }
               sh "pwd"
 	          }
@@ -39,15 +40,20 @@ pipeline {
             script {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]){
                     sh 'docker login -u$user -p$pass'
-                    sh 'docker push mohammad67/test:${BUILD_NUMBER}'
+                    sh 'docker push mohammad67/bookreview_frontend:${BUILD_NUMBER}'
+                    sh 'docker push mohammad67/bookreview_frontend:latest'
                 }
         	    }
 	          }
 	      }
         
-        stage('deploy') {
+        stage('trigger updatemanifestjob"') {
           steps {
-            sh 'echo Hello from Deploy Section'
+            sh 'echo "triggering updatemanifestjob"'
+            build job: 'updatemanifest', parameters: [
+              string(name: 'DOCKERTAG', value: env.BUILD_NUMBER),
+              string(name: 'COMPONENT', value: 'frontend')
+            ]            
           }
         }
     }
