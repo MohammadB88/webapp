@@ -32,7 +32,7 @@ spec:
                 secretKeyRef:
                   name: mysql-secret
                   key: password
-          image: mohammad67/mosesreigns_apiserver:v1.2
+          image: mohammad67/bookreview_backend
           name: backend
           imagePullPolicy: Always
           ports:
