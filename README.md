@@ -37,7 +37,7 @@ I have looked into and used the example from [Build and Dockerize a Fullstack Re
 - PersistentVolumes for database
 - A nicer User Interface.
 
-### Use the whole DevOps package for FullStack Application
+### Use the whole DevOps package for the FullStack Application
 - Use Jenkins to build the image and push it to the dockerhub
 - Use ArgoCD to deploy the new application
 - Use ELK to monitor and analyze the cluster behaviour (not implemented)
