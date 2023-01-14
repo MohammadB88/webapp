@@ -8,6 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+              sh 'echo ${COMPONENT}'
               checkout([$class: 'GitSCM', 
                 branches: [[name: '*/main']],
                 extensions: [
