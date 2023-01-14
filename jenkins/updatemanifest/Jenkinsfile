@@ -1,10 +1,10 @@
 pipeline {
     agent any
  
-    environment {
-        DOCKERTAG = 'latest'
-        COMPONENT = 'NODEFAULT'
-    }
+    //environment {
+    //    DOCKERTAG = 'latest'
+    //    COMPONENT = 'NODEFAULT'
+    //}
        
     stages {
         stage('Checkout') {
