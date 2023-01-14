@@ -13,7 +13,7 @@ pipeline {
                 branches: [[name: '*/main']],
                 extensions: [
                     [$class: 'SparseCheckoutPaths', 
-                    sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'/fullstack/${env.COMPONENT}']]]
+                    sparseCheckoutPaths:[[$class:'SparseCheckoutPath', path:'/fullstack/env.COMPONENT']]]
                     ],
                 userRemoteConfigs: [[url: 'https://github.com/MohammadB88/webapp.git']]])
               sh "ls -ltr"
@@ -24,11 +24,11 @@ pipeline {
       	  steps {
 	          script {
               sh "pwd"
-              dir('fullstack/${env.COMPONENT}') {
+              dir('fullstack/${COMPONENT}') {
                   sh "pwd"
                   sh 'ls -la'
-                  sh 'docker build -t "mohammad67/bookreview_${env.COMPONENT}:${BUILD_NUMBER}" . '
-                  sh 'docker build -t "mohammad67/bookreview_${env.COMPONENT}:latest" . '
+                  sh 'docker build -t "mohammad67/bookreview_${COMPONENT}:${BUILD_NUMBER}" . '
+                  sh 'docker build -t "mohammad67/bookreview_${COMPONENT}:latest" . '
               }
               sh "pwd"
 	          }
@@ -46,8 +46,8 @@ pipeline {
             script {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]){
                     sh 'docker login -u$user -p$pass'
-                    sh 'docker push mohammad67/bookreview_${env.COMPONENT}:${BUILD_NUMBER}'
-                    sh 'docker push mohammad67/bookreview_${env.COMPONENT}:latest'
+                    sh 'docker push mohammad67/bookreview_${COMPONENT}:${BUILD_NUMBER}'
+                    sh 'docker push mohammad67/bookreview_${COMPONENT}:latest'
                 }
         	    }
 	          }
@@ -58,7 +58,7 @@ pipeline {
             sh 'echo "triggering updatemanifestjob"'
             build job: 'updatemanifest', parameters: [
               string(name: 'DOCKERTAG', value: env.BUILD_NUMBER),
-              string(name: 'COMPONENT', value: '${env.COMPONENT}')
+              string(name: 'COMPONENT', value: '${COMPONENT}')
             ]            
           }
         }
