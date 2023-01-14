@@ -37,4 +37,12 @@ I have looked into and used the example from [Build and Dockerize a Fullstack Re
 - PersistentVolumes for database
 - A nicer User Interface.
 
+### Use the whole DevOps package for FullStack Application
+- Use Jenkins to build the image and push it to the dockerhub
+- Use ArgoCD to deploy the new application
+- Use ELK to monitor and analyze the cluster behaviour
+
+Here, I use the appoach explained in [Saha Rajdeep Repo](https://github.com/saha-rajdeep/kubernetescode), where he uses two jenkins' pipeline for Continuous Integration/Deployment (CI) and Continuous Delivery (CD). In the first pipeline, the images will be build and pushed to the dockerhub, and then the next pipeline will be triggered. The second pipeline will make the necessary modifications to the kubernetes resources and then push them to the corresponding repository.
+
+ArgoCD will monitor the repository for any changes and trigger an update of the deployment.
 
