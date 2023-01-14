@@ -6,10 +6,9 @@ pipeline {
     //    COMPONENT = 'NODEFAULT'
     //}
        
-    parameters {[
-         string(name: 'DOCKERTAG', defaultValue: 'latest'),
+    parameters {
+         string(name: 'DOCKERTAG', defaultValue: 'latest')
          string(name: 'COMPONENT', defaultValue: 'NODEFAULT')
-            ]
     }    
 
     stages {
