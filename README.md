@@ -40,6 +40,7 @@ I have looked into and used the example from [Build and Dockerize a Fullstack Re
 ### Use the whole DevOps package for the FullStack Application
 - Use Jenkins to build the image and push it to the dockerhub
 - Use ArgoCD to deploy the new application
+- Use Prometheus and Grafana to monitor different clsuter metrices
 - Use ELK to monitor and analyze the cluster behaviour (not implemented)
 
 Here, I use the appoach explained in [Saha Rajdeep Repo](https://github.com/saha-rajdeep/kubernetescode), where he uses two jenkins pipelines, one for Continuous Integration/Deployment (CI) and another one for Continuous Delivery (CD). 
@@ -48,3 +49,4 @@ In the first pipeline, the images will be build and pushed to the dockerhub, and
 
 ArgoCD will regularly (every 30s) monitor the repository for any changes and trigger an update of the deployment. I have implemented the whole lifecycle for nginx part.
 
+I have used [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator) to deploy all the required components to monitor the behaviour of different cluster resources like nodes, deployments, services and ....
