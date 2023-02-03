@@ -35,12 +35,15 @@ jobs:
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:ga
     - 
       name: update the manifest for backend apps
-      uses: jacobtomlinson/gha-find-replace@v2
-      with:
-        find: "${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:1"
-        replace: "${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:ga"
-        regex: false
-        include: ./fullstack/backend-deployment.yml
+      run: |
+        sh "sed -i 's+mohammad67/bookreview_backend.*+mohammad67/bookreview_backend:ga+g' fullstack/backend-deployment.yml"
+
+      # uses: jacobtomlinson/gha-find-replace@v2
+      # with:
+      #   find: "${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:1"
+      #   replace: "${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:ga"
+      #   regex: false
+      #   include: ./fullstack/backend-deployment.yml
     - 
       name: Commit and push changes
       run: |
