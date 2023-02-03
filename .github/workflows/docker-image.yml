@@ -37,9 +37,9 @@ jobs:
       name: update the manifest for backend apps
       uses: jacobtomlinson/gha-find-replace@v2
       with:
-        find: "mohammad67/bookreview_backend.*"
-        replace: "mohammad67/bookreview_backend:ga"
-        regex: true
+        find: "${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:1"
+        replace: "${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:ga"
+        regex: false
         include: ./fullstack/backend-deployment.yml
     - 
       name: Commit and push changes
