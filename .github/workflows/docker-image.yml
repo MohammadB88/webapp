@@ -37,9 +37,9 @@ jobs:
       name: update the manifest for backend apps
       working-directory: ./fullstack
       run: |
-        sh "echo $(pwd)"
+        sh "pwd"
         sh "cat backend-deployment.yml"
-        sh "sed -i 's${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend.*+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:ga+g' ./fullstack/backend-deployment.yml"
+        sh "sed -i 's${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend.*+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:ga+g' backend-deployment.yml"
 
       # uses: jacobtomlinson/gha-find-replace@v2
       # with:
