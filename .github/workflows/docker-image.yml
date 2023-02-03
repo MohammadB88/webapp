@@ -30,6 +30,6 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         context: ./fullstack/backend
-        file: ./Dockerfile
+        file: ./fullstack/backend/Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:ga
