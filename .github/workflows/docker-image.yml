@@ -33,3 +33,20 @@ jobs:
         file: ./fullstack/backend/Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:ga
+    - 
+      name: update the manifest for backend apps
+      uses: jacobtomlinson/gha-find-replace@v2
+      with:
+        find: "mohammad67/bookreview_backend.*"
+        replace: "mohammad67/bookreview_backend:ga"
+        regex: true
+        include: ./fullstack/backend-deployment.yml
+    - 
+      name: Commit and push changes
+      run: |
+        git config --global user.name "your ${{ secrets.GITHUB_USERNAME }}"
+        git config --global user.email "your ${{ secrets.GITHUB_EMAIL }}"
+
+        git add -A
+        git commit -m "commit message"
+        git push
