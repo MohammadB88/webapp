@@ -40,7 +40,8 @@ jobs:
         pwd
         ls -la
         cat backend-deployment.yml
-        sed -i 's${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend.*+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:ga+g' backend-deployment.yml
+        sed -i 's+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend.*+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:ga+g' backend-deployment.yml"
+
 
       # uses: jacobtomlinson/gha-find-replace@v2
       # with:
