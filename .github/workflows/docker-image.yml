@@ -33,6 +33,11 @@ jobs:
     #     file: ./fullstack/backend/Dockerfile
     #     push: true
     #     tags: ${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:ga
+  
+  update_manifests:
+    runs-on: ubuntu-latest
+
+    steps:
     - 
       name: update the manifest for backend apps
       working-directory: ./fullstack
@@ -49,6 +54,10 @@ jobs:
       #   replace: "${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:ga"
       #   regex: false
       #   include: ./fullstack/backend-deployment.yml
+  
+  deploy-changes:
+    runs-on: ubuntu-latest
+    steps:
     - 
       name: Commit and push changes
       run: |
