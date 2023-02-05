@@ -19,7 +19,7 @@ spec:
       containers:
         - env:
             - name: MYSQL_DATABASE
-              value: books
+              value: book_reviews
             - name: MYSQL_HOST
               value: localhost
             - name: MYSQL_USER
