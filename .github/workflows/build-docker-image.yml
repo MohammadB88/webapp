@@ -1,5 +1,8 @@
 name: Build and Test Docker Image
 
+env:
+  IMAGE_TAG: "latest"
+
 on:
   push:
     branches: [ "main" ]

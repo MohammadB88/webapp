@@ -1,5 +1,8 @@
 name: Update Kubernetes Manifests
 
+env:
+  IMAGE_TAG: "latest"
+  
 on:
   workflow_run:
     workflows: [Build and Test Docker Image]
