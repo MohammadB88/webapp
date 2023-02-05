@@ -44,6 +44,7 @@ jobs:
       #   include: ./fullstack/backend-deployment.yml
   
   deploy-changes:
+    needs: update_manifests
     runs-on: ubuntu-latest
     steps:
     -
