@@ -1,4 +1,4 @@
-CREATE DATABASE book_reviews;
+CREATE DATABASE IF NOT EXISTS book_reviews;
 USE book_reviews;
 
 CREATE TABLE reviews (
