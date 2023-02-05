@@ -38,7 +38,7 @@ jobs:
       name: Build and push frontend image
       uses: docker/build-push-action@v4
       with:
-        context: ./fullstack/frontent
-        file: ./fullstack/frontent/Dockerfile
+        context: ./fullstack/frontend
+        file: ./fullstack/frontend/Dockerfile
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/bookreview_frontent:${{ env.IMAGE_TAG }}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/bookreview_frontend:${{ env.IMAGE_TAG }}

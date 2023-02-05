@@ -2,7 +2,7 @@ name: Update Kubernetes Manifests
 
 env:
   IMAGE_TAG: "latest"
-  
+
 on:
   workflow_run:
     workflows: [Build and Test Docker Image]
@@ -46,6 +46,9 @@ jobs:
   deploy-changes:
     runs-on: ubuntu-latest
     steps:
+    -
+      name: Checkout
+      uses: actions/checkout@v3
     - 
       name: Commit and push changes
       run: |
