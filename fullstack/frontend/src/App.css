@@ -78,29 +78,3 @@ form button[type="submit"] {
   cursor: pointer;
   margin-top: 10px;
 }
-
-
-/* .App {
-  text-align: center; 
-}
-
-.form{
-  display: inline-block;
-  justify-content: center;
-}
-
-.form input{
-  width: 250px;
-  margin: 10px;
-}
-
-.body {
-  /* background-image: url(./img/background.png);*/
-  /* background-size: 'cover';
-  background-color: blue;
-  color: black;
-  padding: 400px;
-  font-family: Arial;
-  text-align: center;
-}
-
