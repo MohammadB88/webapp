@@ -1,6 +1,14 @@
 # webapp
 In this project, I will deploy different webapp applications on a local kubernetes cluster using declerative approach. 
 
+# Table of Content
+- [webapp](#webapp)
+- [Table of Content](#table-of-content)
+  - [Simple and Static Applications](#simple-and-static-applications)
+  - [Application with Ingress and Secret](#application-with-ingress-and-secret)
+  - [Fullstack Application](#fullstack-application)
+    - [DevOps Packages - Complete Kubernetes Setup](#devops-packages---complete-kubernetes-setup)
+    - [DevOps Packages - Complete Minikube Setup](#devops-packages---complete-minikube-setup)
 
 ## Simple and Static Applications
 
@@ -27,7 +35,9 @@ which forwards the traffic to one or more local ports to a deployment port more 
 This application is running without problem on the kubernetes cluster, but its content can not be found. Hence, I will come back to it later.
 
 
-## Fullstack Application with all the possible microservices
+## Fullstack Application
+This application will have all the components for a modern app. There are microservices for Database(MySQL), Backend, and Frontend. In addition, there is a nginx microservice as reverse proxy and a administrative microservice for direct access to the database.
+
 - There is MYSQL database and its service
 - There is an API-backend (NodeJS) which talks to the database through the db-service
 - There is a Frontend (React) to respond to the user's request
@@ -37,11 +47,11 @@ I have looked into and used the example from [Build and Dockerize a Fullstack Re
 - PersistentVolumes for database
 - A nicer User Interface.
 
-### Use the whole DevOps package for the FullStack Application
-- Use Jenkins to build the image and push it to the dockerhub
+### DevOps Packages - Complete Kubernetes Setup
+- Use Jenkins in the Kubernetes complete setup inside hyper-V and GitHub Actions in the minikube setup to build the image and push it to the dockerhub
 - Use ArgoCD to deploy the new application
 - Use Prometheus and Grafana to monitor different clsuter metrices
-- Use ELK to monitor and analyze the cluster behaviour (not implemented)
+- ??? Use ELK to monitor and analyze the cluster behaviour (not implemented)
 
 Here, I use the appoach explained in [Saha Rajdeep Repo](https://github.com/saha-rajdeep/kubernetescode), where he uses two jenkins pipelines, one for Continuous Integration/Deployment (CI) and another one for Continuous Delivery (CD). 
 
@@ -50,3 +60,18 @@ In the first pipeline, the images will be build and pushed to the dockerhub, and
 ArgoCD will regularly (every 30s) monitor the repository for any changes and trigger an update of the deployment. I have implemented the whole lifecycle for nginx part.
 
 I have used [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator) to deploy all the required components to monitor the behaviour of different cluster resources like nodes, deployments, services and ....
+
+
+### DevOps Packages - Complete Minikube Setup
+- Use  GitHub Actions in the minikube setup to build the image and push it to the dockerhub
+- Use ArgoCD to deploy the new application
+- ??? Use Prometheus and Grafana to monitor different clsuter metrices
+- ??? Use ELK to monitor and analyze the cluster behaviour (not implemented)
+
+??? Here, I use the appoach explained in [Saha Rajdeep Repo](https://github.com/saha-rajdeep/kubernetescode), where he uses two jenkins pipelines, one for Continuous Integration/Deployment (CI) and another one for Continuous Delivery (CD). 
+
+??? In the first pipeline, the images will be build and pushed to the dockerhub, and then the next pipeline will be triggered. The second pipeline will make the necessary modifications to the kubernetes resources and then push them to the corresponding repository.
+
+ArgoCD will regularly (every 30s) monitor the repository for any changes and trigger an update of the deployment. I have implemented the whole lifecycle for nginx part.
+
+??? I have used [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator) to deploy all the required components to monitor the behaviour of different cluster resources like nodes, deployments, services and ....
