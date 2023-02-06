@@ -1,7 +1,7 @@
 name: Update Kubernetes Manifests
 
 env:
-  IMAGE_TAG: "latest"
+  IMAGE_TAG: "10"
 
 on:
   workflow_run:
