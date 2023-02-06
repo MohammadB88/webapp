@@ -1,80 +1,89 @@
 body {
   font-family: Arial, sans-serif;
-  padding: 30px;
+  background-color: #f2f2f2;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-form {
-  max-width: 500px;
+.book-review-app {
+  max-width: 800px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 30px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  padding: 20px;
+  background-color: rgb(13, 15, 153);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #ccc;
 }
 
-form label {
+.book-review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.book-review-header h1 {
+  font-size: 36px;
+}
+
+.book-review-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.book-review-item {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #ccc;
+}
+
+.book-review-item h2 {
+  font-size: 24px;
   margin-bottom: 10px;
+}
+
+.book-review-item p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+
+book-review-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #dddddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #dddddd;
   font-weight: bold;
 }
 
-form input[type="text"],
-form input[type="number"],
-form textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
-form button[type="submit"] {
-  width: 100%;
-  padding: 10px;
-  background-color: blue;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.column1 {
+  width: 20%;
 }
 
-.review-list {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.column2 {
+  width: 20%;
 }
 
-.review-item {
-  width: 100%;
-  padding: 20px;
-  margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.column3 {
+  width: 20%;
 }
 
-.review-item h2 {
-  margin-bottom: 10px;
+.column4 {
+  width: 20%;
 }
 
-.review-item p {
-  margin-bottom: 10px;
-}
-
-.review-item button {
-  background-color: red;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
+.column5 {
+  width: 20%;
 }
