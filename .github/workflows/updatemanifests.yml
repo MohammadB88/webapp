@@ -25,8 +25,8 @@ jobs:
         pwd
         ls -la
         cat backend-deployment.yml
-        sed -i 's+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend.*+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:${{ env.IMAGE_TAG }}+g' backend-deployment.yml
-        cat backend-deployment.yml
+      # sed -i 's+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend.*+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:${{ env.IMAGE_TAG }}+g' backend-deployment.yml
+      # cat backend-deployment.yml
 
     - 
       name: update the manifest for frontend apps
@@ -35,24 +35,24 @@ jobs:
         pwd
         ls -la
         cat frontend-deployment.yml
-        sed -i 's+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_frontend.*+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_frontend:${{ env.IMAGE_TAG }}+g' frontend-deployment.yml
-        cat frontend-deployment.yml
+      # sed -i 's+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_frontend.*+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_frontend:${{ env.IMAGE_TAG }}+g' frontend-deployment.yml
+      # cat frontend-deployment.yml
 
-    - 
-      name: git status fullstack app
-      working-directory: ./fullstack
-      run: | 
-        git status
-    - 
-      name: Commit and push changes
-      working-directory: ./fullstack
-      run: |
-        git config --global user.name "${{ secrets.G_USERNAME }}"
-        git config --global user.email "${{ secrets.G_EMAIL }}"
+    # - 
+    #   name: git status fullstack app
+    #   working-directory: ./fullstack
+    #   run: | 
+    #     git status
+    # - 
+    #   name: Commit and push changes
+    #   working-directory: ./fullstack
+    #   run: |
+    #     git config --global user.name "${{ secrets.G_USERNAME }}"
+    #     git config --global user.email "${{ secrets.G_EMAIL }}"
 
-        git add -A
-        git commit -m "commit message"
-        git push
+    #     git add -A
+    #     git commit -m "commit message"
+    #     git push
 
       # uses: jacobtomlinson/gha-find-replace@v2
       # with:
