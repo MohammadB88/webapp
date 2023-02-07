@@ -63,7 +63,7 @@ jobs:
 
     - name: print out the steps outcome
       run: |
-        echo ${{ jobs.run_number.outcome }}
+        echo ${{ steps.run_number.outcome }}
 
     - 
       name: update the manifest for backend apps
