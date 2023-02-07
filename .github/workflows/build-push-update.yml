@@ -1,7 +1,7 @@
 name: Build and Test Docker Image
 
 env:
-  IMAGE_TAG: "10"
+  IMAGE_TAG: "11"
 
 on:
   push:
@@ -20,31 +20,31 @@ jobs:
     - name: Output Run Number
       run: echo ${{ github.run_number }}
 
-    # -
-    #   name: Login to Docker Hub
-    #   uses: docker/login-action@v2
-    #   with:
-    #     username: ${{ secrets.DOCKERHUB_USERNAME }}
-    #     password: ${{ secrets.DOCKERHUB_TOKEN }}
-    # -
-    #   name: Set up Docker Buildx
-    #   uses: docker/setup-buildx-action@v2
-    # -
-    #   name: Build and push backend image
-    #   uses: docker/build-push-action@v4
-    #   with:
-    #     context: ./fullstack/backend
-    #     file: ./fullstack/backend/Dockerfile
-    #     push: true
-    #     tags: ${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:${{ env.IMAGE_TAG }}
-    # -
-    #   name: Build and push frontend image
-    #   uses: docker/build-push-action@v4
-    #   with:
-    #     context: ./fullstack/frontend
-    #     file: ./fullstack/frontend/Dockerfile
-    #     push: true
-    #     tags: ${{ secrets.DOCKERHUB_USERNAME }}/bookreview_frontend:${{ env.IMAGE_TAG }}
+    -
+      name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    -
+      name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    -
+      name: Build and push backend image
+      uses: docker/build-push-action@v4
+      with:
+        context: ./fullstack/backend
+        file: ./fullstack/backend/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:${{ env.IMAGE_TAG }}
+    -
+      name: Build and push frontend image
+      uses: docker/build-push-action@v4
+      with:
+        context: ./fullstack/frontend
+        file: ./fullstack/frontend/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/bookreview_frontend:${{ env.IMAGE_TAG }}
 
   update_manifests:
     needs:
@@ -72,13 +72,14 @@ jobs:
         cat backend-deployment.yml
         sed -i 's+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend.*+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:${{ env.IMAGE_TAG }}+g' backend-deployment.yml
         cat backend-deployment.yml
-    - name: print out the steps outcome
-      run: |
-        echo ${{ steps.update_backend.outcome }}
 
-    - name: print out the steps output
-      run: |
-        echo ${{ steps.update_backend.outputs.stdout }}
+    # - name: print out the steps outcome
+    #   run: |
+    #     echo ${{ steps.update_backend.outcome }}
+
+    # - name: print out the steps output
+    #   run: |
+    #     echo ${{ steps.update_backend.outputs.stdout }}
 
     - 
       name: update the manifest for frontend apps
@@ -87,24 +88,24 @@ jobs:
         pwd
         ls -la
         cat frontend-deployment.yml
-      # sed -i 's+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_frontend.*+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_frontend:${{ env.IMAGE_TAG }}+g' frontend-deployment.yml
-      # cat frontend-deployment.yml
+        sed -i 's+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_frontend.*+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_frontend:${{ env.IMAGE_TAG }}+g' frontend-deployment.yml
+        cat frontend-deployment.yml
 
-    # - 
-    #   name: git status fullstack app
-    #   working-directory: ./fullstack
-    #   run: | 
-    #     git status
-    # - 
-    #   name: Commit and push changes
-    #   working-directory: ./fullstack
-    #   run: |
-    #     git config --global user.name "${{ secrets.G_USERNAME }}"
-    #     git config --global user.email "${{ secrets.G_EMAIL }}"
+    - 
+      name: git status fullstack app
+      working-directory: ./fullstack
+      run: | 
+        git status
+    - 
+      name: Commit and push changes
+      working-directory: ./fullstack
+      run: |
+        git config --global user.name "${{ secrets.G_USERNAME }}"
+        git config --global user.email "${{ secrets.G_EMAIL }}"
 
-    #     git add -A
-    #     git commit -m "commit message"
-    #     git push
+        git add -A
+        git commit -m "commit message"
+        git push
 
     # uses: jacobtomlinson/gha-find-replace@v2
       # with:
