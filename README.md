@@ -74,3 +74,12 @@ I have used [Prometheus Operator](https://github.com/prometheus-operator/prometh
 ArgoCD will regularly (every 30s) monitor the repository for any changes and trigger an update of the deployment. I have implemented the whole lifecycle for nginx part.
 
 ??? I have used [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator) to deploy all the required components to monitor the behaviour of different cluster resources like nodes, deployments, services and ....
+
+
+The application and argocd UI can be reached via port-forwarding feature of Kubernetes:
+```
+kubectl port-forward svc/nginx-svc 3050:3050
+kubectl port-forward svc/adminer-svc 8000:8000
+
+kubectl port-forward svc/argocd-server -n argocd 8443:443
+```
