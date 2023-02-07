@@ -52,7 +52,7 @@ body {
 }
 
 
-book-review-table {
+.book-review-table {
   width: 80%;
   border-collapse: collapse;
   margin: auto;
@@ -60,18 +60,18 @@ book-review-table {
   margin-top: 30px;
 }
 
-th, td {
+.th, .td {
   border: 1px solid #dddddd;
   padding: 8px;
   text-align: left;
 }
 
-th {
+.th {
   background-color: #dddddd;
   font-weight: bold;
 }
 
-tr:nth-child(even) {
+.tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
@@ -105,7 +105,7 @@ form {
   font-size: 20px;
 }
 
-input[type="text"], input[type="email"], input[type="password"], input[type="number"] {
+input[type="text"], input[type="text"], input[type="number"] {
   width: 80%;
   padding: 12px;
   margin-bottom: 20px;
@@ -132,5 +132,5 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-  background-color: #3e8e41;
+  background-color: #1ea022;
 }

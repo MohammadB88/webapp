@@ -96,8 +96,15 @@ jobs:
       working-directory: ./fullstack
       run: | 
         git status
+
+    - name: Check if there are any changes
+      id: verify_diff
+      run: |
+        git diff --quiet . || echo "changed=true" >> $GITHUB_OUTPUT
+
     - 
       name: Commit and push changes
+      if: steps.verify_diff.outputs.changed == 'true'
       working-directory: ./fullstack
       run: |
         git config --global user.name "${{ secrets.G_USERNAME }}"
