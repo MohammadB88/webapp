@@ -62,19 +62,23 @@ jobs:
       id: run_number
       run: echo ${{ github.run_number }}
 
-    - name: print out the steps outcome
-      run: |
-        echo ${{ steps.checkout.outcome }}
-
     - 
       name: update the manifest for backend apps
       working-directory: ./fullstack
+      id: update_backend
       run: |
         pwd
         ls -la
         cat backend-deployment.yml
-      # sed -i 's+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend.*+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:${{ env.IMAGE_TAG }}+g' backend-deployment.yml
-      # cat backend-deployment.yml
+        sed -i 's+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend.*+${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:${{ env.IMAGE_TAG }}+g' backend-deployment.yml
+        cat backend-deployment.yml
+    - name: print out the steps outcome
+      run: |
+        echo ${{ steps.update_backend.outcome }}
+
+    - name: print out the steps outcome
+      run: |
+        echo ${{ steps.update_backend.outputs }}
 
     - 
       name: update the manifest for frontend apps
