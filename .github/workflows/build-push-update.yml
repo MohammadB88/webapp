@@ -76,9 +76,9 @@ jobs:
       run: |
         echo ${{ steps.update_backend.outcome }}
 
-    - name: print out the steps outcome
+    - name: print out the steps output
       run: |
-        echo ${{ steps.update_backend.outputs }}
+        echo ${{ steps.update_backend.outputs.stdout }}
 
     - 
       name: update the manifest for frontend apps
