@@ -17,12 +17,8 @@ jobs:
     -
       name: Checkout
       uses: actions/checkout@v3
-    - name: Output Run ID
-      run: echo ${{ github.run_id }}
     - name: Output Run Number
       run: echo ${{ github.run_number }}
-    - name: Output Run Attempt
-      run: echo ${{ github.run_attempt }}
 
     # -
     #   name: Login to Docker Hub
@@ -61,12 +57,12 @@ jobs:
       name: Checkout
       uses: actions/checkout@v3
 
-    - name: Output Run ID
-      run: echo ${{ github.run_id }}
     - name: Output Run Number
       run: echo ${{ github.run_number }}
-    - name: Output Run Attempt
-      run: echo ${{ github.run_attempt }}
+
+    - name: print out the steps outcome
+      run: |
+        sh "echo ${{ steps.build.outcome }}"
 
     - 
       name: update the manifest for backend apps
@@ -103,3 +99,18 @@ jobs:
     #     git add -A
     #     git commit -m "commit message"
     #     git push
+
+    # uses: jacobtomlinson/gha-find-replace@v2
+      # with:
+      #   find: "${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:1"
+      #   replace: "${{ secrets.DOCKERHUB_USERNAME }}/bookreview_backend:ga"
+      #   regex: false
+      #   include: ./fullstack/backend-deployment.yml
+  
+  # deploy-changes:
+  #   needs: update_manifests
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   -
+  #     name: Checkout
+  #     uses: actions/checkout@v3
