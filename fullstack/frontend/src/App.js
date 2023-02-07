@@ -42,14 +42,15 @@ function App() {
           rating,
           review
         });
-        const responseAfterUpdate = await axios.get("/api/reviews");
-        const updatedReviews = responseAfterUpdate.data;
         // const updatedReviews = reviews.map(review =>
         //   review.id === editId ? res.data : review
         // );
         setReviews(updatedReviews);
         setEditId(null);
       }
+      const responseAfterUpdate = await axios.get("/api/reviews");
+      const updatedReviews = responseAfterUpdate.data;
+      setReviews(updatedReviews);
       setAuthor("");
       setTitle("");
       setRating("");
