@@ -58,11 +58,12 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Output Run Number
+      id: run_number
       run: echo ${{ github.run_number }}
 
     - name: print out the steps outcome
       run: |
-        sh "echo ${{ steps.build.outcome }}"
+        echo ${{ jobs.run_number.outcome }}
 
     - 
       name: update the manifest for backend apps
