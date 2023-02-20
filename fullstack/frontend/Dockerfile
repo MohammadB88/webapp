@@ -20,19 +20,20 @@
 # CMD ["npm", "start"]
 
 # Build stage
-FROM node:alpine AS builder
+# Stage 1: build stage
+FROM node:alpine AS build
 WORKDIR /app
 COPY package.json ./
 COPY package-lock.json ./
-RUN npm install
-COPY ./ ./
+RUN npm ci
+COPY . .
 RUN npm run build
 
-# Production stage
+# Stage 2: production stage
 FROM node:alpine
 WORKDIR /app
-COPY package.json ./
-COPY package-lock.json ./
-COPY --from=builder /app/build ./
-RUN npm install --only=production
+COPY --from=build /app/package.json ./
+COPY --from=build /app/package-lock.json ./
+RUN npm ci --production
+COPY --from=build /app/dist ./dist
 CMD ["npm", "start"]
