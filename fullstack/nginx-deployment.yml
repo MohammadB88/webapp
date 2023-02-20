@@ -15,8 +15,26 @@ spec:
         app: reverse-proxy
     spec:
       containers:
-        - image: mohammad67/bookreview_nginx:18
-          name: nginx
+        - name: nginx
+          image: mohammad67/bookreview_nginx:18
           imagePullPolicy: Always
           ports:
           - containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3

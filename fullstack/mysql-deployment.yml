@@ -17,7 +17,9 @@ spec:
         app: database
     spec:
       containers:
-        - env:
+        - name: mysql-db
+          image: mysql
+          env:
             - name: MYSQL_DATABASE
               value: book_reviews
             - name: MYSQL_HOST
@@ -37,10 +39,30 @@ spec:
                 secretKeyRef:
                   name: mysql-secret
                   key: root_password
-          image: mysql
-          name: mysql-db
           ports:
           - containerPort: 3306
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - "-c"
+                - "mysqladmin ping -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD || exit 1"
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - "-c"
+                - "mysqladmin ping -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD || exit 1"
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
           volumeMounts:
             - mountPath: /docker-entrypoint-initdb.d
               name: mysql-script
