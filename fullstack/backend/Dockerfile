@@ -18,6 +18,7 @@ RUN npm run build
 # Production stage
 FROM node:alpine
 WORKDIR /app
-COPY --from=builder /app/build ./
-RUN npm install --only=production
-CMD ["npm", "start"]
+COPY package.json package-lock.json ./
+RUN npm install --production
+COPY --from=builder /app/dist ./dist
+CMD ["npm", "run", "start:prod"]
