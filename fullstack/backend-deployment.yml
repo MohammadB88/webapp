@@ -37,7 +37,7 @@ spec:
                 secretKeyRef:
                   name: textrazor
                   key: textrazor.txt
-          image: mohammad67/bookreview_backend:12
+          image: mohammad67/bookreview_backend:13
           name: backend
           imagePullPolicy: Always
           ports:
