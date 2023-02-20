@@ -41,6 +41,13 @@ spec:
                   key: root_password
           ports:
           - containerPort: 3306
+          resources:
+            requests:
+              cpu: "15m"
+              memory: "400Mi"
+            limits:
+              cpu: "30m"
+              memory: "600Mi"
           readinessProbe:
             exec:
               command:

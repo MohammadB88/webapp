@@ -15,10 +15,17 @@ spec:
         app: adminer
     spec:
       containers:
-        - env:
+        - name: adminer
+          image: adminer:latest
+          env:
             - name: ADMINER_DEFAULT_SERVER
               value: mysql-db-svc
-          image: adminer:latest
-          name: adminer
           ports:
             - containerPort: 8080
+          resources:
+            requests:
+              cpu: "1m"
+              memory: "25Mi"
+            limits:
+              cpu: "5m"
+              memory: "50Mi"

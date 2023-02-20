@@ -17,7 +17,9 @@ spec:
         app: backend
     spec:
       containers:
-        - env:
+        - name: backend
+          image: mohammad67/bookreview_backend:14
+          env:
             - name: MYSQL_DATABASE
               value: book_reviews
             - name: MYSQL_HOST_IP
@@ -32,11 +34,16 @@ spec:
                 secretKeyRef:
                   name: mysql-secret
                   key: password
-          image: mohammad67/bookreview_backend:14
-          name: backend
           imagePullPolicy: Always
           ports:
           - containerPort: 3001
+          resources:
+            requests:
+              cpu: "1m"
+              memory: "35Mi"
+            limits:
+              cpu: "5m"
+              memory: "70Mi"
           readinessProbe:
             tcpSocket:
               port: 3001
