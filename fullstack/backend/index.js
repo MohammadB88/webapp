@@ -2,10 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2');
 
-// Add summary block
-const http = require('http');
-const querystring = require('querystring');
-
 const app = express();
 app.use(bodyParser.json());
 
@@ -70,73 +66,6 @@ app.delete('/reviews/:id', (req, res) => {
     res.send({ message: 'Review deleted successfully!' });
   });
 });
-
-
-// Retrieve the book summary from TextRazor API
-app.get('/books/:bookId/summary', (req, res) => {
-  // Fetch book title and author from MySQL database
-  const bookId = req.params.bookId;
-  const query = `SELECT title, author FROM books WHERE id = ${bookId}`;
-  connection.query(query, (error, results) => {
-    if (error) {
-      console.error(error);
-      res.status(500).send('Error fetching book');
-      return;
-    }
-
-    const book = results[0];
-
-    // Generate summary using TextRazor API
-    const postData = querystring.stringify({
-      'extractors': 'entities,topics',
-      'text': book.title + ' ' + book.author,
-    });
-
-    const options = {
-      hostname: 'api.textrazor.com',
-      path: '/',
-      method: 'POST',
-      headers: {
-        'X-TextRazor-Key': process.env.API_TOKEN,
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Content-Length': postData.length,
-      },
-    };
-
-    const request = http.request(options, (response) => {
-      let data = '';
-
-      response.on('data', (chunk) => {
-        data += chunk;
-      });
-
-      response.on('end', () => {
-        const summary = JSON.parse(data).response.sentences[0].sentence;
-
-        // Update book record in MySQL database
-        const updateQuery = `UPDATE books SET summary = ${mysql.escape(summary)} WHERE id = ${bookId}`;
-        connection.query(updateQuery, (error, results) => {
-          if (error) {
-            console.error(error);
-            res.status(500).send('Error updating book');
-            return;
-          }
-
-          res.send({ summary });
-        });
-      });
-    });
-
-    request.on('error', (error) => {
-      console.error(error);
-      res.status(500).send('Error generating summary');
-    });
-
-    request.write(postData);
-    request.end();
-  });
-});
-
 
 const port = 3001;
 app.listen(port, () => {

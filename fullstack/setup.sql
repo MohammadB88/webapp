@@ -7,7 +7,6 @@ CREATE TABLE reviews (
   author VARCHAR(255) NOT NULL,
   rating INT(11) NOT NULL,
   review TEXT NOT NULL,
-  summary TEXT DEFAULT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
