@@ -38,15 +38,13 @@ spec:
           ports:
           - containerPort: 3001
           readinessProbe:
-            httpGet:
-              path: /healthz
+            tcpSocket:
               port: 3001
             initialDelaySeconds: 10
             periodSeconds: 15
             timeoutSeconds: 5
           livenessProbe:
-            httpGet:
-              path: /healthz
+            tcpSocket:
               port: 3001
             initialDelaySeconds: 15
             periodSeconds: 30
