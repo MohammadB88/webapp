@@ -44,10 +44,10 @@ spec:
           resources:
             requests:
               cpu: "15m"
-              memory: "400Mi"
+              memory: "500Mi"
             limits:
-              cpu: "30m"
-              memory: "600Mi"
+              cpu: "50m"
+              memory: "700Mi"
           readinessProbe:
             exec:
               command:

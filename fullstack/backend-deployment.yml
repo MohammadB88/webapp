@@ -42,7 +42,7 @@ spec:
               cpu: "1m"
               memory: "35Mi"
             limits:
-              cpu: "5m"
+              cpu: "20m"
               memory: "70Mi"
           readinessProbe:
             tcpSocket:
