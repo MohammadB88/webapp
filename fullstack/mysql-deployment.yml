@@ -46,7 +46,7 @@ spec:
               cpu: "15m"
               memory: "500Mi"
             limits:
-              cpu: "50m"
+              cpu: "100m"
               memory: "700Mi"
           readinessProbe:
             exec:
