@@ -1,9 +1,9 @@
-# Web Application
+# **Web Application**
 In this project, I will deploy different Web applications on a local Kubernetes or Minikube cluster using declarative approach. 
 
-# Table of Content
-- [Web Application](#web-application)
-- [Table of Content](#table-of-content)
+# **Table of Content**
+- [**Web Application**](#web-application)
+- [**Table of Content**](#table-of-content)
   - [**Simple and Static Applications**](#simple-and-static-applications)
   - [**Application with Ingress and Secret**](#application-with-ingress-and-secret)
   - [**Fullstack Application**](#fullstack-application)
@@ -37,6 +37,8 @@ This application is running without problem on the kubernetes cluster, but its c
 
 ## **Fullstack Application**
 In a fullstack application, there are usually at least three components. A database to store data, a backned part to communicate with the database and prepare response for the user, and a frontend, which displays the results to and communicate with the customer. Here, I will prepare a "Book Review App", containing all these three elements. 
+
+![Architecture of the fullstack application](Application_Architecture.png)
 
 In a modern architecture, each part will be containerized using Docker and deployed as a microservice usually on a container orchestrator platform like Kubernetes. Then, they are connected through an object called *service*. For this application, I have used templates from [Moses Maina](https://www.section.io/engineering-education/build-and-dockerize-a-full-stack-react-app-with-nodejs-and-nginx/). However, since it was prepared for docker and docker-compose, I have vastly modified the files and further developed it, digging in the google :smiley: and with the help of [ChatGPT](https://chat.openai.com/), so that at the end it could be deployed on Kubernetes.
 
