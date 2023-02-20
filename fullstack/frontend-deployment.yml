@@ -15,7 +15,7 @@ spec:
         app: frontend
     spec:
       containers:
-        - image: mohammad67/bookreview_frontend:13
+        - image: mohammad67/bookreview_frontend:14
           name: frontend
           imagePullPolicy: Always
           ports:
