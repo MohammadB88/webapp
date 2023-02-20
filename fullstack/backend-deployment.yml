@@ -42,8 +42,8 @@ spec:
               cpu: "1m"
               memory: "35Mi"
             limits:
-              cpu: "50m"
-              memory: "70Mi"
+              cpu: "100m"
+              memory: "150Mi"
           readinessProbe:
             tcpSocket:
               port: 3001
