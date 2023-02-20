@@ -32,6 +32,11 @@ spec:
                 secretKeyRef:
                   name: mysql-secret
                   key: password
+            - name: API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: textrazor
+                  key: textrazor.txt
           image: mohammad67/bookreview_backend:12
           name: backend
           imagePullPolicy: Always

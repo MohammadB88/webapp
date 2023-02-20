@@ -10,6 +10,7 @@ function App() {
   const [rating, setRating] = useState("");
   const [review, setReview] = useState("");
   const [editId, setEditId] = useState(null);
+  const [summary, setSummary] = useState('');
 
   useEffect(() => {
     getReviews();
@@ -78,6 +79,20 @@ function App() {
     setEditId(review.id);
   };
 
+  const generateSummary = () => {
+    setLoading(true);
+
+    axios.get(`/api/books/${bookId}/summary`)
+      .then(response => {
+        setSummary(response.data.summary);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error(error);
+        setLoading(false);
+      });
+  };
+
   return (
     <div className="book-review-app">
       <h1>Book Review App</h1>
@@ -127,6 +142,9 @@ function App() {
               <td>
                 <button onClick={() => editReview(review)}>Edit</button>
                 <button onClick={() => deleteReview(review.id)}>Delete</button>
+                <button onClick={generateSummary} disabled={loading}>Generate Summary</button>
+                {loading && <p>Loading...</p>}
+                {summary && <p>{summary}</p>}
               </td>
             </tr>
           ))}

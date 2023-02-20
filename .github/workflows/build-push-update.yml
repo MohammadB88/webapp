@@ -1,7 +1,7 @@
 name: Build and Test Docker Image
 
 env:
-  IMAGE_TAG: "12"
+  IMAGE_TAG: "13"
 
 on:
   push:
