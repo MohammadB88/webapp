@@ -37,22 +37,22 @@ spec:
           imagePullPolicy: Always
           ports:
           - containerPort: 3001
-          resources:
-            requests:
-              cpu: "1m"
-              memory: "35Mi"
-            limits:
-              cpu: "200m"
-              memory: "150Mi"
-          readinessProbe:
-            tcpSocket:
-              port: 3001
-            initialDelaySeconds: 10
-            periodSeconds: 15
-            timeoutSeconds: 5
-          livenessProbe:
-            tcpSocket:
-              port: 3001
-            initialDelaySeconds: 15
-            periodSeconds: 30
-            timeoutSeconds: 5
+          # resources:
+          #   requests:
+          #     cpu: "1m"
+          #     memory: "35Mi"
+          #   limits:
+          #     cpu: "200m"
+          #     memory: "150Mi"
+          # readinessProbe:
+          #   tcpSocket:
+          #     port: 3001
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 15
+          #   timeoutSeconds: 5
+          # livenessProbe:
+          #   tcpSocket:
+          #     port: 3001
+          #   initialDelaySeconds: 15
+          #   periodSeconds: 30
+          #   timeoutSeconds: 5

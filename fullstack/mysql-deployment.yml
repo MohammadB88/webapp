@@ -41,35 +41,35 @@ spec:
                   key: root_password
           ports:
           - containerPort: 3306
-          resources:
-            requests:
-              cpu: "15m"
-              memory: "500Mi"
-            limits:
-              cpu: "200m"
-              memory: "900Mi"
-          readinessProbe:
-            exec:
-              command:
-                - sh
-                - "-c"
-                - "mysqladmin ping -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD || exit 1"
-            initialDelaySeconds: 10
-            periodSeconds: 5
-            timeoutSeconds: 1
-            successThreshold: 1
-            failureThreshold: 3
-          livenessProbe:
-            exec:
-              command:
-                - sh
-                - "-c"
-                - "mysqladmin ping -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD || exit 1"
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 1
-            successThreshold: 1
-            failureThreshold: 3
+          # resources:
+          #   requests:
+          #     cpu: "15m"
+          #     memory: "500Mi"
+          #   limits:
+          #     cpu: "200m"
+          #     memory: "900Mi"
+          # readinessProbe:
+          #   exec:
+          #     command:
+          #       - sh
+          #       - "-c"
+          #       - "mysqladmin ping -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD || exit 1"
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 5
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
+          #   failureThreshold: 3
+          # livenessProbe:
+          #   exec:
+          #     command:
+          #       - sh
+          #       - "-c"
+          #       - "mysqladmin ping -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD || exit 1"
+          #   initialDelaySeconds: 30
+          #   periodSeconds: 10
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
+          #   failureThreshold: 3
           volumeMounts:
             - mountPath: /docker-entrypoint-initdb.d
               name: mysql-script

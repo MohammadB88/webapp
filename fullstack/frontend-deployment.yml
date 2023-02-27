@@ -20,28 +20,28 @@ spec:
           imagePullPolicy: Always
           ports:
           - containerPort: 3000
-          resources:
-            requests:
-              cpu: "1m"
-              memory: "250Mi"
-            limits:
-              cpu: "500m"
-              memory: "800Mi"
-          readinessProbe:
-            httpGet:
-              path: /healthz
-              port: 3000
-            initialDelaySeconds: 10
-            periodSeconds: 5
-            timeoutSeconds: 1
-            successThreshold: 1
-            failureThreshold: 3
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: 3000
-            initialDelaySeconds: 15
-            periodSeconds: 10
-            timeoutSeconds: 1
-            successThreshold: 1
-            failureThreshold: 3
+          # resources:
+          #   requests:
+          #     cpu: "1m"
+          #     memory: "250Mi"
+          #   limits:
+          #     cpu: "500m"
+          #     memory: "800Mi"
+          # readinessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 3000
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 5
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
+          #   failureThreshold: 3
+          # livenessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 3000
+          #   initialDelaySeconds: 15
+          #   periodSeconds: 10
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
+          #   failureThreshold: 3
