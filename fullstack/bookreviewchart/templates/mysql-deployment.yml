@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: database
+  name: mysql-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      containers:
+        - name: mysql-db
+          image: mysql
+          env:
+            - name: MYSQL_DATABASE
+              value: book_reviews
+            - name: MYSQL_HOST
+              value: localhost
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: user
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: password
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: root_password
+          ports:
+          - containerPort: 3306
+          # resources:
+          #   requests:
+          #     cpu: "15m"
+          #     memory: "500Mi"
+          #   limits:
+          #     cpu: "200m"
+          #     memory: "900Mi"
+          # readinessProbe:
+          #   exec:
+          #     command:
+          #       - sh
+          #       - "-c"
+          #       - "mysqladmin ping -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD || exit 1"
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 5
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
+          #   failureThreshold: 3
+          # livenessProbe:
+          #   exec:
+          #     command:
+          #       - sh
+          #       - "-c"
+          #       - "mysqladmin ping -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD || exit 1"
+          #   initialDelaySeconds: 30
+          #   periodSeconds: 10
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
+          #   failureThreshold: 3
+          volumeMounts:
+            - mountPath: /docker-entrypoint-initdb.d
+              name: mysql-script
+      volumes:
+        - name: mysql-script
+          configMap:
+            name: database-init-script
+
+
+            # securityContext:
+            #capabilities:
+            #  add:
+            #    - SYS_NICE

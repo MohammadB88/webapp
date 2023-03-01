@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frontend
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - image: mohammad67/bookreview_frontend:14
+          name: frontend
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 3000
+          # resources:
+          #   requests:
+          #     cpu: "1m"
+          #     memory: "250Mi"
+          #   limits:
+          #     cpu: "500m"
+          #     memory: "800Mi"
+          # readinessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 3000
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 5
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
+          #   failureThreshold: 3
+          # livenessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 3000
+          #   initialDelaySeconds: 15
+          #   periodSeconds: 10
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
+          #   failureThreshold: 3

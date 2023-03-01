@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: reverse-proxy
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reverse-proxy
+  template:
+    metadata:
+      labels:
+        app: reverse-proxy
+    spec:
+      containers:
+        - name: nginx
+          image: mohammad67/bookreview_nginx:18
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
+          # resources:
+          #   requests:
+          #     cpu: "1m"
+          #     memory: "10Mi"
+          #   limits:
+          #     cpu: "5m"
+          #     memory: "25Mi"
+          # readinessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 80
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 5
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
+          #   failureThreshold: 3
+          # livenessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 80
+          #   initialDelaySeconds: 15
+          #   periodSeconds: 10
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
+          #   failureThreshold: 3
