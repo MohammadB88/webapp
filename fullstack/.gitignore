@@ -1,3 +1,5 @@
 docker-to-kubernetes
 backend/node_modules
 frontend/node_modules
+
+bookreviewchart-*.tgz
