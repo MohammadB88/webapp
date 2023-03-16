@@ -1,7 +1,8 @@
 import openai
 import gradio
+import secret_key
 
-openai.api_key = "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"
+openai.api_key = secret_key.API_TOKEN
 
 messages = [{"role": "system", "content": "You are an englich teacher. Provide your response for a first grader."}]
 
