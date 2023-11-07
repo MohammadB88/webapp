@@ -1,10 +1,16 @@
 // import logo from './logo.svg';
 import './App.css';
 import './normal.css';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 function App() {
 
+  useEffect(() => {
+    getEngines();
+  }, []);
+
+  const [models, setModels] = useState([]);
+  const [currentModel, setCurrentModel] = useState("ada");
   const [input, setInput] = useState("");
   const [chatLog, setChatLog] = useState([{
     user: "gpt",
@@ -15,6 +21,19 @@ function App() {
   }
   ]);
 
+  function clearChat(){
+    setChatLog([]);
+  }
+
+  function getEngines(){
+    fetch("http://localhost:3080/models",)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data.models.data)
+      setModels(data.models.data)
+    })
+  }
+  
   async function handleSubmit(e){
     e.preventDefault();
     let chatLogNew = [...chatLog, { user: "me", message: `${input}`}];
@@ -29,24 +48,32 @@ function App() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-          message: messages
+          message: messages,
+          currentModel,
         })
       });
     const data = await response.json();
     // console.log(data.messages);
     setChatLog([...chatLogNew, { user: "gpt", message: `${data.message}`}])
   }
-
-  function clearChat(){
-    setChatLog([]);
-  }
-
+  
   return (
     <div className="App">
     <aside className="sidemenu">
       <div className="side-menu-button" onClick={clearChat}>
         <span>+</span>
         New Chat
+      </div>
+      <div className='models'>
+        <select onChange={(e) => {
+          setCurrentModel(e.target.value)
+        }}>
+          {models.map((model, index) => (
+          <option key={model.id} value={model.id}>
+            {model.id}
+          </option>
+          ))}
+        </select>
       </div>
     </aside>
     <section className="chatbox">
